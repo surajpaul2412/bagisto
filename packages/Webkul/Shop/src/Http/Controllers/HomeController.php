@@ -5,6 +5,8 @@ namespace Webkul\Shop\Http\Controllers;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Core\Repositories\SliderRepository;
 use Webkul\Product\Repositories\SearchRepository;
+use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
 
 class HomeController extends Controller
 {
@@ -21,6 +23,8 @@ class HomeController extends Controller
      * @var \Webkul\Core\Repositories\SearchRepository
      */
     protected $searchRepository;
+    protected $categoryRepository;
+    protected $attributeRepository;
 
     /**
      * Create a new controller instance.
@@ -31,11 +35,14 @@ class HomeController extends Controller
      */
     public function __construct(
         SliderRepository $sliderRepository,
-        SearchRepository $searchRepository
+        SearchRepository $searchRepository,
+        CategoryRepository $categoryRepository,
+        AttributeRepository $attributeRepository
     ) {
         $this->sliderRepository = $sliderRepository;
-
         $this->searchRepository = $searchRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->attributeRepository = $attributeRepository;
 
         parent::__construct();
     }
@@ -48,8 +55,9 @@ class HomeController extends Controller
     public function index()
     {
         $sliderData = $this->sliderRepository->getActiveSliders();
+        $categories = $this->categoryRepository->getAllCategories();
 
-        return view($this->_config['view'], compact('sliderData'));
+        return view($this->_config['view'], compact('sliderData','categories'));
     }
 
     /**

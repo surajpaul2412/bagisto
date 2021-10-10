@@ -244,15 +244,4 @@ class CategoryController extends Controller
 
         return $category->id === 1 || $rootIdInChannels->contains($category->id);
     }
-
-    public function all()
-    {
-        $categories = $this->categoryRepository->getAllCategories();
-        return view('shop::cms.category.index', compact('categories'));
-    }
-
-    public function show($slug){
-        $category = $this->categoryRepository->findBySlugOrFail($slug);
-        return view('shop::cms.category.show', compact('category'));
-    }
 }

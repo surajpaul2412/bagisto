@@ -303,6 +303,13 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     });
     //customer routes end here
 
+    // suraj custom routes start
+    Route::get('allCategories', 'Webkul\Category\Http\Controllers\CategoryController@all')->name('allCategories.index');
+    Route::get('category', 'Webkul\Category\Http\Controllers\CategoryController@all')->name('category.index');
+    Route::get('category/{slug}', 'Webkul\Category\Http\Controllers\CategoryController@show')->name('category.show');
+    Route::get('product/{sku}', 'Webkul\Product\Http\Controllers\ProductController@detail')->name('product.detail');
+    // suraj custom routes ends
+    
     Route::get('page/{slug}', 'Webkul\CMS\Http\Controllers\Shop\PagePresenterController@presenter')->name('shop.cms.page');
 
     Route::fallback(\Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController::class . '@index')

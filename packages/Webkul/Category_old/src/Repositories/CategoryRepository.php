@@ -308,9 +308,4 @@ class CategoryRepository extends Repository
 
         return $data;
     }
-
-    public function getAllCategories(){
-        $categories = $this->model->all();
-        return $categories;
-    }
 }
